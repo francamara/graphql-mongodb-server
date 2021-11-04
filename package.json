@@ -1,0 +1,39 @@
+{
+  "name": "graphql-mongodb-server",
+  "version": "1.0.0",
+  "description": "This is an API for a Blog made with GraphQL and MongoDB for simplicity",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/francamara/graphql-mongodb-server.git"
+  },
+  "keywords": [
+    "MongoDB",
+    "Babel",
+    "GraphQL"
+  ],
+  "author": "Francamaradev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/francamara/graphql-mongodb-server/issues"
+  },
+  "homepage": "https://github.com/francamara/graphql-mongodb-server#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.16.0",
+    "@babel/preset-env": "^7.4.3",
+    "nodemon": "^2.0.14"
+  },
+  "dependencies": {
+    "apollo-server": "^3.4.0",
+    "apollo-server-core": "^3.4.0",
+    "apollo-server-express": "^3.4.0",
+    "express": "^4.17.1",
+    "graphql": "^15.7.2",
+    "mongoose": "^6.0.12"
+  }
+}

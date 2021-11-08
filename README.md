@@ -6,6 +6,7 @@ This is a GraphQL API for a basic blog with MongoDB.
 
 - Nodejs: v14 or higher
 - A MongoDB cluster
+- Hola mundo
 
 ## Main dependencies used
 

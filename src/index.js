@@ -3,36 +3,25 @@ import { ApolloServer } from 'apollo-server-express'
 import mongoose from 'mongoose'
 import colors from 'colors'
 import http from 'http'
+import { typeDefs } from './typeDefs'
+import { resolvers } from './resolvers'
 
 const dotenv = require('dotenv').config()
 
 const app = express()
 
-const typeDefs = `
-    type Query{
-        totalPosts: String!
-    }
-`
-const resolvers = {
-  Query: {
-    totalPosts: () => 'Test',
-  },
-}
+const httpserver = http.createServer(app)
+
 let apolloServer = null
-async function startServer() {
+
+async function startApolloServer() {
   apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
   })
   await apolloServer.start()
-  apolloServer.applyMiddleware({ app })
+  apolloServer.applyMiddleware({ app, path: '/api' })
 }
-startServer()
-const httpserver = http.createServer(app)
-
-app.get('/rest', function (req, res) {
-  res.json({ data: 'api working' })
-})
 
 const port = process.env.PORT || 4000
 
@@ -49,12 +38,15 @@ mongoose
   .connect(
     `mongodb+srv://${DBData.user}:${DBData.pwd}@${DBData.cluster}.c0twa.mongodb.net/${DBData.dbname}?retryWrites=true&w=majority`
   )
-  .catch((error) => {
-    console.error(error)
+  .catch((err) => {
+    console.error(err)
     return
   })
   .then(() => {
     console.log('📚 DB Connected succesfully!'.cyan)
+  })
+  .then(() => {
+    startApolloServer()
   })
   .then(() => {
     app.listen(port, function () {
